@@ -1,0 +1,72 @@
+name: Update reports & deploy site
+
+on:
+  schedule:
+    - cron: "45 2 * * 1-5"    # 08:15 IST — morning outlook (pre-market)
+    - cron: "0 13 * * 1-5"    # 18:30 IST — evening update (post-close)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "morning | evening | auto"
+        default: "auto"
+  push:
+    branches: [main]
+    paths:                    # rebuild site when code/site changes, not on data commits
+      - "analog/**"
+      - "docs/index.html"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write             # to commit refreshed docs/data back
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Refresh market data
+        run: |
+          python analog/data_prep.py
+          python analog/features.py
+
+      - name: Generate report (${{ github.event.inputs.mode || 'auto' }})
+        run: python analog/report_site.py --mode "${{ github.event.inputs.mode || 'auto' }}"
+
+      - name: Persist reports back to repo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet || git commit -m "chore: refresh reports [skip ci]"
+          git push || echo "nothing to push"
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true     # auto-enable GitHub Pages (Actions source) on first run
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

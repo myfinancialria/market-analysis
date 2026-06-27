@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Analysis — Daily Volatility & Range Outlook</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3441;
+    --txt:#e6edf3; --muted:#8b97a6; --accent:#3b82f6; --good:#22c55e;
+    --warn:#f59e0b; --bad:#ef4444; --chip:#21304a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 0 60px}
+  header{background:linear-gradient(180deg,#11161f,#0d1117);border-bottom:1px solid var(--line);padding:26px 20px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+  h1{font-size:23px;font-weight:700;letter-spacing:-.2px}
+  .sub{color:var(--muted);font-size:13.5px;margin-top:5px}
+  .honesty{background:#1a2330;border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:8px;padding:12px 14px;margin:18px 0;color:#c7d2e0;font-size:13.5px}
+  .honesty b{color:var(--txt)}
+  .tabs{display:flex;gap:8px;margin:18px 0 6px}
+  .tab{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:8px 18px;
+    border-radius:8px;cursor:pointer;font-weight:600;font-size:14px}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .updated{color:var(--muted);font-size:12.5px;margin:4px 0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .card h2{font-size:18px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .asof{color:var(--muted);font-size:12.5px;font-weight:500}
+  .price{font-size:15px;color:var(--muted);margin:2px 0 14px}
+  .price b{color:var(--txt);font-size:17px}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700}
+  .b-normal{background:#1e3a5f;color:#7cc0ff}.b-elevated{background:#3a1e1e;color:#ff9b9b}
+  .b-compressed{background:#1e3a2a;color:#7ce0a0}
+  .conf{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--chip);color:#9db4d6}
+  .hero{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px;margin:8px 0 14px}
+  .hero .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .hero .big{font-size:30px;font-weight:800;margin:3px 0}
+  .hero .band{color:var(--muted);font-size:13px}
+  .rows{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
+  .rows td{padding:5px 0;border-bottom:1px solid #1e2530}
+  .rows td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:#cdd9e6}
+  .rows td:first-child{color:var(--muted)}
+  .sec{margin-top:14px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .prec{font-size:12.5px;font-variant-numeric:tabular-nums}
+  .prec span{display:inline-block;min-width:92px;color:var(--muted)}
+  .dir{margin-top:12px;font-size:12.5px;color:#b9a36a;background:#241f12;border:1px solid #3a3115;
+    border-radius:8px;padding:9px 11px}
+  footer{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
+  a{color:var(--accent);text-decoration:none}
+  .err{color:var(--bad)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>📊 Market Analysis — Volatility &amp; Range Outlook</h1>
+  <div class="sub">Nifty &amp; Bank Nifty · what today's closest historical analogs imply for the next 5 sessions</div>
+</div></header>
+
+<div class="wrap">
+  <div class="honesty">
+    <b>What this is:</b> a precedent engine. It finds the historical sessions most like today
+    (price, volume, RSI, ADX, 50/200-DMA, CPR) and reports the <b>distribution of forward
+    volatility / trading range</b> that followed — validated to beat a volatility-persistence
+    baseline out-of-sample. <b>What it is not:</b> a direction caller. Short-horizon up/down was
+    tested and <b>failed</b> out-of-sample, so direction below is unvalidated context only — not a trade signal.
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-mode="morning">🌅 Morning Outlook</div>
+    <div class="tab" data-mode="evening">🌆 Evening Update</div>
+  </div>
+  <div class="updated" id="updated"></div>
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    Engine &amp; methodology: <a href="https://github.com/myfinancialria/market-analysis/blob/main/analog/DESIGN.md">DESIGN.md</a>
+    · forecasts the distribution, not the direction · data: Yahoo Finance EOD ·
+    educational use only, not investment advice.
+  </footer>
+</div>
+
+<script>
+const INDICES = ["nifty","banknifty"];
+let mode = "morning";
+
+function regimeClass(r){
+  if(!r) return "b-normal";
+  if(r.startsWith("ELEVATED")) return "b-elevated";
+  if(r.startsWith("COMPRESSED")) return "b-compressed";
+  return "b-normal";
+}
+function card(d){
+  const r=d.range_5d, v=d.realized_vol_5d, c=d.cpr_next, dir=d.direction_context;
+  const prec=(d.precedents||[]).map(p=>{
+    const rr=p.realized_range_pct==null?"–":p.realized_range_pct.toFixed(1)+"%";
+    const ret=p.realized_ret_5d==null?"–":(p.realized_ret_5d>0?"+":"")+p.realized_ret_5d.toFixed(1)+"%";
+    return `<div class="prec"><span>${p.date}</span> range ${rr} · 5d ${ret}</div>`;
+  }).join("");
+  return `<div class="card">
+    <h2>${d.index_label}
+      <span class="conf">confidence: ${d.confidence} · ${d.confidence_label}</span></h2>
+    <div class="price">Close <b>${d.close.toLocaleString()}</b>
+      <span class="asof">· as of ${d.as_of_bar} · gen ${d.generated_ist}</span></div>
+
+    <div class="hero">
+      <div class="lbl">Expected 5-day range</div>
+      <div class="big">${r.predicted_pct}% <span class="badge ${regimeClass(r.regime)}">${r.regime.split(" ")[0]}</span></div>
+      <div class="band">≈ ${r.predicted_points.toLocaleString()} pts · likely band
+        ${r.expected_low.toLocaleString()} – ${r.expected_high.toLocaleString()}
+        · vs normal ${r.baseline_pct}% (${r.vs_baseline_pp>0?"+":""}${r.vs_baseline_pp}pp, ${r.percentile}th pctile)</div>
+    </div>
+
+    <table class="rows">
+      <tr><td>Range — typical (p25–p75)</td><td>${r.p25_pct}% – ${r.p75_pct}%</td></tr>
+      <tr><td>Range — busy day (80th pct)</td><td>${r.q80_pct}%</td></tr>
+      <tr><td>Implied realized vol (annual)</td><td>${v.predicted_annual_pct}% vs ${v.baseline_annual_pct}% normal</td></tr>
+    </table>
+
+    <div class="sec">Next-session CPR</div>
+    <table class="rows">
+      <tr><td>Pivot</td><td>${c.pivot.toLocaleString()}</td></tr>
+      <tr><td>TC / BC</td><td>${c.tc.toLocaleString()} / ${c.bc.toLocaleString()}</td></tr>
+      <tr><td>CPR width</td><td>${c.width_pct}% ${c.width_pct<0.3?"(narrow → breakout-prone)":""}</td></tr>
+    </table>
+
+    <div class="sec">Closest historical analogs</div>
+    ${prec}
+
+    <div class="dir">⚠️ Direction context (NOT validated): ${dir.p_up_5d==null?"–":dir.p_up_5d+"% of analogs were higher 5d later"}.
+      ${dir.disclaimer}</div>
+  </div>`;
+}
+
+async function load(){
+  const grid=document.getElementById("grid");
+  grid.innerHTML="";
+  let stamp="";
+  for(const idx of INDICES){
+    try{
+      const res=await fetch(`./data/${mode}_${idx}.json?t=`+Date.now());
+      if(!res.ok) throw new Error(res.status);
+      const d=await res.json();
+      grid.insertAdjacentHTML("beforeend",card(d));
+      stamp=d.generated_ist;
+    }catch(e){
+      grid.insertAdjacentHTML("beforeend",
+        `<div class="card err">No ${mode} report for ${idx} yet (${e.message}).</div>`);
+    }
+  }
+  document.getElementById("updated").textContent=stamp?("Last generated: "+stamp):"";
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active"); mode=t.dataset.mode; load();
+});
+load();
+</script>
+</body>
+</html>

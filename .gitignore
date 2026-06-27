@@ -1,0 +1,16 @@
+# regenerated from yfinance by data_prep/features — never committed
+/data/
+*.parquet
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+
+# never commit secrets / local tooling
+.mcp.json
+*.log
+*.session
+.env
