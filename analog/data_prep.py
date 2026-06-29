@@ -33,10 +33,14 @@ def fetch(symbol):
     if h.empty:
         raise RuntimeError(f"yfinance returned no data for {symbol}")
     h = h[["Open", "High", "Low", "Close", "Volume"]].copy()
-    h.index = h.index.tz_localize(None)
+    # tz-strip, then normalize to midnight: yfinance occasionally returns sub-second
+    # timestamp components which fastparquet cannot losslessly round-trip on newer
+    # pandas (ValueError casting ms->s). Daily bars carry no meaningful time-of-day.
+    h.index = h.index.tz_localize(None).normalize()
     h = h.rename(columns=str.lower)
     h.index.name = "date"
     h = h.reset_index()
+    h["date"] = h["date"].astype("datetime64[ns]")
     h = h.dropna(subset=["open", "high", "low", "close"])
     h = h.drop_duplicates(subset="date").sort_values("date").reset_index(drop=True)
     h["volume"] = h["volume"].fillna(0).astype("int64")
