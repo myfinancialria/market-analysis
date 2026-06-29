@@ -4,14 +4,14 @@
   "mode": "morning",
   "generated_ist": "2026-06-29 09:31 IST",
   "as_of_bar": "2026-06-29",
-  "close": 24055.8,
+  "close": 24048.7,
   "confidence": 0.48,
   "confidence_label": "MODERATE",
   "pool_size": 3290,
   "k": 50,
   "range_5d": {
     "predicted_pct": 2.48,
-    "predicted_points": 596.0,
+    "predicted_points": 595.0,
     "p25_pct": 2.14,
     "p75_pct": 3.09,
     "q80_pct": 3.35,
@@ -19,18 +19,18 @@
     "vs_baseline_pp": -0.17,
     "percentile": 43.0,
     "regime": "NORMAL",
-    "expected_low": 23758.0,
-    "expected_high": 24354.0
+    "expected_low": 23751.0,
+    "expected_high": 24346.0
   },
   "realized_vol_5d": {
     "predicted_annual_pct": 12.6,
     "baseline_annual_pct": 11.3
   },
   "cpr_next": {
-    "pivot": 24066.3,
+    "pivot": 24063.9,
     "tc": 24071.5,
-    "bc": 24061.1,
-    "width_pct": 0.044
+    "bc": 24056.3,
+    "width_pct": 0.063
   },
   "direction_context": {
     "p_up_5d": 62.0,
@@ -73,9 +73,9 @@
       "realized_ret_5d": 0.89
     },
     {
-      "date": "2018-06-22",
-      "realized_range_pct": 2.53,
-      "realized_ret_5d": -0.99
+      "date": "2026-02-19",
+      "realized_range_pct": 1.74,
+      "realized_ret_5d": 0.17
     }
   ]
 }
