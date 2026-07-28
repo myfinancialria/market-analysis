@@ -2,70 +2,60 @@
   "index": "nifty",
   "index_label": "NIFTY 50",
   "mode": "morning",
-  "generated_ist": "2026-07-27 11:36 IST",
-  "as_of_bar": "2026-07-27",
-  "close": 23960.25,
-  "confidence": 0.34,
+  "generated_ist": "2026-07-28 11:03 IST",
+  "as_of_bar": "2026-07-28",
+  "close": 24020.9,
+  "confidence": 0.39,
   "confidence_label": "MIXED \u2014 precedents disagree on direction",
-  "pool_size": 3310,
+  "pool_size": 3311,
   "k": 50,
   "range_5d": {
-    "predicted_pct": 2.54,
-    "predicted_points": 608.0,
-    "p25_pct": 1.96,
-    "p75_pct": 3.33,
+    "predicted_pct": 2.55,
+    "predicted_points": 612.0,
+    "p25_pct": 1.92,
+    "p75_pct": 3.07,
     "q80_pct": 3.61,
     "baseline_pct": 2.64,
-    "vs_baseline_pp": -0.11,
+    "vs_baseline_pp": -0.09,
     "percentile": 46.0,
     "regime": "NORMAL",
-    "expected_low": 23656.0,
-    "expected_high": 24264.0
+    "expected_low": 23715.0,
+    "expected_high": 24327.0
   },
   "realized_vol_5d": {
-    "predicted_annual_pct": 9.4,
+    "predicted_annual_pct": 10.4,
     "baseline_annual_pct": 11.3
   },
   "cpr_next": {
-    "pivot": 23941.3,
-    "tc": 23950.8,
-    "bc": 23931.8,
-    "width_pct": 0.079
+    "pivot": 24008.0,
+    "tc": 24014.5,
+    "bc": 24001.5,
+    "width_pct": 0.054
   },
   "direction_context": {
-    "p_up_5d": 50.0,
+    "p_up_5d": 46.0,
     "disclaimer": "Direction is NOT validated out-of-sample (DESIGN.md \u00a78.1) \u2014 context only, do not trade on it."
   },
   "precedents": [
     {
-      "date": "2015-11-03",
-      "realized_range_pct": 4.27,
-      "realized_ret_5d": -3.44
+      "date": "2018-07-03",
+      "realized_range_pct": 2.61,
+      "realized_ret_5d": 2.31
     },
     {
-      "date": "2026-05-14",
-      "realized_range_pct": 2.29,
-      "realized_ret_5d": -0.15
+      "date": "2026-05-18",
+      "realized_range_pct": 2.78,
+      "realized_ret_5d": 1.61
     },
     {
-      "date": "2018-06-29",
-      "realized_range_pct": 1.98,
-      "realized_ret_5d": 0.54
+      "date": "2026-05-15",
+      "realized_range_pct": 2.3,
+      "realized_ret_5d": 0.32
     },
     {
-      "date": "2015-11-02",
-      "realized_range_pct": 4.28,
-      "realized_ret_5d": -1.68
-    },
-    {
-      "date": "2018-07-02",
-      "realized_range_pct": 2.16,
-      "realized_ret_5d": 1.84
-    },
-    {
-      "date": "2015-06-05",
-      "realized_range_pct": 2.75,
-      "realized_ret_5d": -1.62
+      "date": "2015-11-04",
+      "realized_range_pct": 3.73,
+      "realized_ret_5d": -3.46
     },
     {
       "date": "2015-08-14",
@@ -73,9 +63,19 @@
       "realized_ret_5d": -2.57
     },
     {
-      "date": "2026-05-15",
-      "realized_range_pct": 2.3,
-      "realized_ret_5d": 0.32
+      "date": "2026-05-14",
+      "realized_range_pct": 2.29,
+      "realized_ret_5d": -0.15
+    },
+    {
+      "date": "2018-07-04",
+      "realized_range_pct": 2.33,
+      "realized_ret_5d": 1.66
+    },
+    {
+      "date": "2015-08-18",
+      "realized_range_pct": 10.08,
+      "realized_ret_5d": -6.92
     }
   ]
 }
