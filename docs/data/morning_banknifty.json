@@ -2,25 +2,25 @@
   "index": "banknifty",
   "index_label": "BANK NIFTY",
   "mode": "morning",
-  "generated_ist": "2026-08-17 09:02 IST",
+  "generated_ist": "2026-08-18 08:57 IST",
   "as_of_bar": "2026-08-14",
   "close": 57491.1,
-  "confidence": 0.51,
+  "confidence": 0.54,
   "confidence_label": "MODERATE",
-  "pool_size": 2672,
+  "pool_size": 2669,
   "k": 50,
   "range_5d": {
-    "predicted_pct": 2.54,
-    "predicted_points": 1458.0,
+    "predicted_pct": 2.55,
+    "predicted_points": 1466.0,
     "p25_pct": 1.86,
-    "p75_pct": 3.85,
-    "q80_pct": 3.98,
+    "p75_pct": 3.99,
+    "q80_pct": 4.35,
     "baseline_pct": 3.66,
-    "vs_baseline_pp": -1.12,
+    "vs_baseline_pp": -1.11,
     "percentile": 23.0,
     "regime": "COMPRESSED \u2014 expect a quieter tape than usual",
-    "expected_low": 56762.0,
-    "expected_high": 58220.0
+    "expected_low": 56758.0,
+    "expected_high": 58224.0
   },
   "realized_vol_5d": {
     "predicted_annual_pct": 13.0,
@@ -33,7 +33,7 @@
     "width_pct": 0.046
   },
   "direction_context": {
-    "p_up_5d": 64.0,
+    "p_up_5d": 66.0,
     "disclaimer": "Direction is NOT validated out-of-sample (DESIGN.md \u00a78.1) \u2014 context only, do not trade on it."
   },
   "precedents": [
@@ -43,14 +43,14 @@
       "realized_ret_5d": 0.17
     },
     {
-      "date": "2026-07-30",
-      "realized_range_pct": 1.94,
-      "realized_ret_5d": 1.6
+      "date": "2024-07-16",
+      "realized_range_pct": 3.81,
+      "realized_ret_5d": -2.06
     },
     {
-      "date": "2026-07-28",
-      "realized_range_pct": 2.61,
-      "realized_ret_5d": 2.03
+      "date": "2021-08-17",
+      "realized_range_pct": 3.99,
+      "realized_ret_5d": -0.78
     },
     {
       "date": "2023-06-12",
@@ -58,9 +58,9 @@
       "realized_ret_5d": -0.71
     },
     {
-      "date": "2024-07-16",
-      "realized_range_pct": 3.81,
-      "realized_ret_5d": -2.06
+      "date": "2026-07-30",
+      "realized_range_pct": 1.57,
+      "realized_ret_5d": 1.05
     },
     {
       "date": "2025-12-29",
@@ -68,9 +68,9 @@
       "realized_ret_5d": 1.89
     },
     {
-      "date": "2021-08-17",
-      "realized_range_pct": 3.99,
-      "realized_ret_5d": -0.78
+      "date": "2025-06-19",
+      "realized_range_pct": 3.05,
+      "realized_ret_5d": 2.93
     },
     {
       "date": "2025-12-17",
