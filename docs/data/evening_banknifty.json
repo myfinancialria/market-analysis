@@ -2,17 +2,17 @@
   "index": "banknifty",
   "index_label": "BANK NIFTY",
   "mode": "evening",
-  "generated_ist": "2026-09-30 23:43 IST",
+  "generated_ist": "2026-10-02 00:08 IST",
   "as_of_bar": "2026-09-30",
   "close": 54633.05,
-  "confidence": 0.38,
+  "confidence": 0.36,
   "confidence_label": "MIXED \u2014 precedents disagree on direction",
   "pool_size": 2704,
   "k": 50,
   "range_5d": {
     "predicted_pct": 3.99,
     "predicted_points": 2178.0,
-    "p25_pct": 2.62,
+    "p25_pct": 2.75,
     "p75_pct": 5.3,
     "q80_pct": 5.53,
     "baseline_pct": 3.61,
@@ -23,7 +23,7 @@
     "expected_high": 55722.0
   },
   "realized_vol_5d": {
-    "predicted_annual_pct": 16.1,
+    "predicted_annual_pct": 16.2,
     "baseline_annual_pct": 15.3
   },
   "cpr_next": {
@@ -48,6 +48,11 @@
       "realized_ret_5d": -3.64
     },
     {
+      "date": "2024-11-18",
+      "realized_range_pct": 5.5,
+      "realized_ret_5d": 3.63
+    },
+    {
       "date": "2019-07-25",
       "realized_range_pct": 5.32,
       "realized_ret_5d": -2.33
@@ -58,19 +63,14 @@
       "realized_ret_5d": 3.36
     },
     {
-      "date": "2024-11-18",
-      "realized_range_pct": 5.5,
-      "realized_ret_5d": 3.63
-    },
-    {
-      "date": "2023-10-27",
-      "realized_range_pct": 2.4,
-      "realized_ret_5d": 1.25
-    },
-    {
       "date": "2020-03-03",
       "realized_range_pct": 11.48,
       "realized_ret_5d": -9.22
+    },
+    {
+      "date": "2016-01-08",
+      "realized_range_pct": 6.21,
+      "realized_ret_5d": -5.8
     },
     {
       "date": "2025-09-01",
