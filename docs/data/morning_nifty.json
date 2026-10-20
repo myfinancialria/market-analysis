@@ -2,38 +2,38 @@
   "index": "nifty",
   "index_label": "NIFTY 50",
   "mode": "morning",
-  "generated_ist": "2026-10-19 13:35 IST",
+  "generated_ist": "2026-10-20 13:25 IST",
   "as_of_bar": "2026-10-19",
-  "close": 22879.8,
-  "confidence": 0.47,
+  "close": 22888.95,
+  "confidence": 0.46,
   "confidence_label": "MODERATE",
   "pool_size": 3368,
   "k": 50,
   "range_5d": {
     "predicted_pct": 2.62,
     "predicted_points": 599.0,
-    "p25_pct": 2.04,
+    "p25_pct": 2.11,
     "p75_pct": 3.65,
     "q80_pct": 3.84,
     "baseline_pct": 2.64,
     "vs_baseline_pp": -0.02,
     "percentile": 49.0,
     "regime": "NORMAL",
-    "expected_low": 22580.0,
-    "expected_high": 23179.0
+    "expected_low": 22589.0,
+    "expected_high": 23188.0
   },
   "realized_vol_5d": {
     "predicted_annual_pct": 11.8,
     "baseline_annual_pct": 11.2
   },
   "cpr_next": {
-    "pivot": 22972.1,
-    "tc": 23018.2,
-    "bc": 22925.9,
-    "width_pct": 0.402
+    "pivot": 22969.7,
+    "tc": 23010.1,
+    "bc": 22929.3,
+    "width_pct": 0.352
   },
   "direction_context": {
-    "p_up_5d": 64.0,
+    "p_up_5d": 62.0,
     "disclaimer": "Direction is NOT validated out-of-sample (DESIGN.md \u00a78.1) \u2014 context only, do not trade on it."
   },
   "precedents": [
@@ -43,14 +43,14 @@
       "realized_ret_5d": 0.69
     },
     {
-      "date": "2019-08-19",
-      "realized_range_pct": 3.97,
-      "realized_ret_5d": 0.04
-    },
-    {
       "date": "2015-12-18",
       "realized_range_pct": 2.62,
       "realized_ret_5d": 2.1
+    },
+    {
+      "date": "2019-08-19",
+      "realized_range_pct": 3.97,
+      "realized_ret_5d": 0.04
     },
     {
       "date": "2016-12-30",
